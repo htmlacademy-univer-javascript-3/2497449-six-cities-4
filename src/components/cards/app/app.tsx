@@ -7,25 +7,27 @@ import OfferScreen from '../../../pages/offer-screen/offer-screen';
 import PageNotFound from '../../../pages/page-not-found/page-not-found';
 import { AuthorizationStatus } from '../../../const';
 import PrivateRoute from '../../../pages/private-route/private-route';
+import { Offer } from '../../../types/offers';
+
 type AppScreenProps = {
-  placesCount: number;
+  offers: Offer[];
 }
 
-function App({placesCount} : AppScreenProps): JSX.Element {
+function App({offers} : AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path ={AppRoute.Main}
-          element={<MainScreen placesCount={placesCount}/>}
+          element={<MainScreen offers={offers}/>}
         />
         <Route
           path ={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesScreen/>
+              <FavoritesScreen offers={offers}/>
             </PrivateRoute>
           }
 
