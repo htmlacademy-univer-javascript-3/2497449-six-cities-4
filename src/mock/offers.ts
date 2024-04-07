@@ -15,7 +15,7 @@ export const offers: Offer[] = [
     numOfBedrooms: 3,
     maxNumOfGuests: 4,
     autor: {name: 'Angelina', autorAvatar: 'img/avatar-angelina.jpg', isPro: true},
-    city: {name: 'Amsterdam'}
+    city: {name: 'Amsterdam', latitude: 52.3909553943508, longitude: 4.85309666406198, zoom: 10 }
   },
   {
     id: '2',
@@ -29,7 +29,7 @@ export const offers: Offer[] = [
     numOfBedrooms: 1,
     maxNumOfGuests: 1,
     autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam'}
+    city: {name: 'Amsterdam' , latitude: 52.360955394350, longitude: 4.85309666406198, zoom: 10 }
   },
 
   {
@@ -44,7 +44,7 @@ export const offers: Offer[] = [
     numOfBedrooms: 1,
     maxNumOfGuests: 1,
     autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam'}
+    city: {name: 'Amsterdam', latitude: 52.3909553943508, longitude: 4.929309666406198, zoom: 10 }
   },
   {
     id: '4',
@@ -58,7 +58,7 @@ export const offers: Offer[] = [
     numOfBedrooms: 1,
     maxNumOfGuests: 1,
     autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam'}
+    city: {name: 'Amsterdam', latitude: 52.3809553943508, longitude: 4.939309666406198, zoom: 10 }
   },
 
 ];
