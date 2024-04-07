@@ -1,6 +1,7 @@
 import CardsList from '../../components/cards-list/cards-list';
 import { Offer } from '../../types/offers';
 import { Link } from 'react-router-dom';
+import Map from '../../components/map/map';
 type MainScreenProps = {
   offers: Offer[];
 }
@@ -101,9 +102,9 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 <CardsList offers={offers}/>
               </div>
             </section>
-            <div className ="cities__right-section">
-              <section className ="cities__map map"></section>
-            </div>
+            <section className="cities__map map">
+              <Map city={offers[0].city} points={offers} selectedPoint={undefined}/>
+            </section>
           </div>
         </div>
       </main>
