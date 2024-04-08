@@ -8,6 +8,7 @@ import PageNotFound from '../../../pages/page-not-found/page-not-found';
 import { AuthorizationStatus } from '../../../const';
 import PrivateRoute from '../../../pages/private-route/private-route';
 import { Offer } from '../../../types/offers';
+import { reviews } from '../../../mock/reviews';
 
 type AppScreenProps = {
   offers: Offer[];
@@ -38,7 +39,7 @@ function App({offers} : AppScreenProps): JSX.Element {
         />
         <Route
           path ={AppRoute.Offer}
-          element={<OfferScreen/>}
+          element={<OfferScreen reviews={reviews} offers={offers}/>}
         />
         <Route
           path ={'*'}

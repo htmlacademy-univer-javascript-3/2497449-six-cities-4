@@ -5,6 +5,7 @@ export type Offer = {
   price: string;
   title: string;
   type: string;
+  description: string;
   isFavorite: boolean;
   rating: number;
   numOfBedrooms: number;

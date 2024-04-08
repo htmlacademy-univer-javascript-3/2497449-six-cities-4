@@ -2,11 +2,13 @@ import CardsList from '../../components/cards-list/cards-list';
 import { Offer } from '../../types/offers';
 import { Link } from 'react-router-dom';
 import Map from '../../components/map/map';
+import { useState } from 'react';
 type MainScreenProps = {
   offers: Offer[];
 }
 
 function MainScreen({offers}: MainScreenProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState(0);
   return (
     <div className ="page page--gray page--main">
       <header className ="header">
@@ -99,11 +101,11 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className ="cities__places-list places__list tabs__content">
-                <CardsList offers={offers}/>
+                <CardsList isMainScreen offers={offers} setActiveCard={setActiveCard}/>
               </div>
             </section>
-            <section className="cities__map map">
-              <Map city={offers[0].city} points={offers} selectedPoint={undefined}/>
+            <section className="cities__right-section">
+              <Map isMainScreen offers={offers} activeCard={activeCard}/>
             </section>
           </div>
         </div>
