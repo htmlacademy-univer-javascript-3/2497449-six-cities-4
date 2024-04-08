@@ -3,25 +3,34 @@ import { Link } from 'react-router-dom';
 
 type CardProps = {
   offer: Offer;
-  onCardMouseOver({id}:{id:number}): void;
+  onCardMouseOver(id:number): void;
+  isMainScreen: boolean;
 };
 
-export default function Card({ offer, onCardMouseOver }: CardProps): JSX.Element {
+enum AddClasses {
+  ArticlePropertyAdClass = 'near-places__card place-card',
+  ArticleMainAdClass = 'cities__card place-card',
+  ImageWrapperPropertyAdClass = 'near-places__image-wrapper place-card__image-wrapper',
+  ImageWrapperMainAdClass = 'cities__image-wrapper place-card__image-wrapper',
+}
+
+
+export default function Card({ offer, onCardMouseOver, isMainScreen }: CardProps): JSX.Element {
   const {id, img, isPremium, price, title, type, isFavorite, rating} = offer;
 
   return (
-    <article className="cities__card place-card"
+    <article className={isMainScreen ? AddClasses.ArticleMainAdClass : AddClasses.ArticlePropertyAdClass}
+      id ={offer.id.toString()}
       onMouseOver={(evt)=> {
         const target = evt.currentTarget as HTMLElement;
-        onCardMouseOver({id: +target.id});
+        onCardMouseOver(+target.id);
       }}
     >
-      {isPremium && (
+      {isMainScreen &&
         <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
-      )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+          <span>{isPremium ? 'Premium' : ''}</span>
+        </div>}
+      <div className={isMainScreen ? AddClasses.ImageWrapperMainAdClass : AddClasses.ImageWrapperPropertyAdClass}>
         <a href="#">
           <img className="place-card__image" src={img} width="260" height="200" alt="Place image" />
         </a>

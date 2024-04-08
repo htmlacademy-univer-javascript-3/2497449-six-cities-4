@@ -1,17 +1,18 @@
 import {useRef, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import useMap from './map-use';
-import { Offer, City } from '../../types/offers';
+import { Offer} from '../../types/offers';
+import { MapClasses } from '../../const';
 
-import {Icon, layerGroup, Marker} from 'leaflet';
+import {Icon, Marker} from 'leaflet';
 
 const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
-type mapData = {
-  city: City;
-  points: Offer[];
-  selectedPoint?:City;
+type MapData = {
+  offers: Offer[];
+  activeCard: number;
+  isMainScreen: boolean;
 }
 
 const defaultCustomIcon = new Icon({
@@ -26,41 +27,33 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({city, points, selectedPoint}: mapData) {
+
+export default function Map(props: MapData): JSX.Element {
+  const {offers, activeCard, isMainScreen} = props;
+
+
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, offers[0].city);
 
   useEffect(() => {
     if (map) {
-      const markerLayer = layerGroup().addTo(map);
-      points.map((e) => e.city).forEach((point) => {
+      offers.forEach((offer: Offer) => {
         const marker = new Marker({
-          lat: point.latitude,
-          lng: point.longitude,
+          lat: offer.city.latitude,
+          lng: offer.city.longitude,
         });
 
-        marker
-          .setIcon(
-            selectedPoint !== undefined && point.name === selectedPoint.name
-              ? currentCustomIcon
-              : defaultCustomIcon
-          )
-          .addTo(markerLayer);
+        marker.setIcon(
+          activeCard !== undefined && offer.id === activeCard.toString()
+            ? currentCustomIcon
+            : defaultCustomIcon
+        )
+          .addTo(map);
       });
-
-      return () => {
-        map.removeLayer(markerLayer);
-      };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, offers, activeCard]);
 
   return (
-    <div
-      style={{height: '100%'}}
-      ref={mapRef}
-    >
-    </div>
+    <section className={isMainScreen ? MapClasses.SectionMainMapClass : MapClasses.SectionPropertyMapClass} ref={mapRef}></section>
   );
 }
-
-export default Map;
