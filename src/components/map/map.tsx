@@ -3,6 +3,8 @@ import 'leaflet/dist/leaflet.css';
 import useMap from './map-use';
 import { Offer} from '../../types/offers';
 import { MapClasses } from '../../const';
+import { City } from '../../types/offers';
+
 
 import {Icon, Marker} from 'leaflet';
 
@@ -13,6 +15,8 @@ type MapData = {
   offers: Offer[];
   activeCard: number;
   isMainScreen: boolean;
+  city: City;
+
 }
 
 const defaultCustomIcon = new Icon({
@@ -29,11 +33,11 @@ const currentCustomIcon = new Icon({
 
 
 export default function Map(props: MapData): JSX.Element {
-  const {offers, activeCard, isMainScreen} = props;
+  const {offers, activeCard, isMainScreen, city} = props;
 
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, offers[0].city);
+  const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
@@ -52,6 +56,12 @@ export default function Map(props: MapData): JSX.Element {
       });
     }
   }, [map, offers, activeCard]);
+
+  useEffect(() => {
+    if (map) {
+      map.flyTo([city.latitude, city.longitude], city.zoom);
+    }
+  }, [map, city]);
 
   return (
     <section className={isMainScreen ? MapClasses.SectionMainMapClass : MapClasses.SectionPropertyMapClass} ref={mapRef}></section>
