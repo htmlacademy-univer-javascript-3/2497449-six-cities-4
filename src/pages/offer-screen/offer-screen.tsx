@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Map from '../../components/map/map';
 import CardsList from '../../components/cards-list/cards-list';
-
+import { Link } from 'react-router-dom';
 type OfferScreenProps = {
   offers: Offer[];
   reviews: Review[];
@@ -22,9 +22,9 @@ export default function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.
         <div className ="container">
           <div className ="header__wrapper">
             <div className ="header__left">
-              <a className ="header__logo-link" href="main.html">
+              <Link to = "/" className ="header__logo-link">
                 <img className ="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
             <nav className ="header__nav">
               <ul className ="header__nav-list">
@@ -170,7 +170,7 @@ export default function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.
               </section>
             </div>
           </div>
-          <Map isMainScreen = {false} offers={offers} activeCard={activeCard}/>
+          <Map isMainScreen = {false} offers={offers} activeCard={activeCard} city={offers[0].city}/>
         </section>
         <div className ="container">
           <section className ="near-places places">
