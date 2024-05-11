@@ -2,7 +2,7 @@ export type Offer = {
   id: string;
   img: string;
   isPremium: boolean;
-  price: string;
+  price: number;
   title: string;
   type: string;
   description: string;
