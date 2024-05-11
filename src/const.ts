@@ -50,3 +50,10 @@ export const Cities = [
     name: 'Dusseldorf',
   },
 ];
+
+export const SORT_TYPES = {
+  0: 'Popular',
+  1: 'Price: low to high',
+  2: 'Price: high to low',
+  3: 'Top rated first',
+};
