@@ -16,7 +16,7 @@ enum AddClasses {
 
 
 export default function Card({ offer, onCardMouseOver, isMainScreen }: CardProps): JSX.Element {
-  const {id, img, isPremium, price, title, type, isFavorite, rating} = offer;
+  const {id, previewImage, isPremium, price, title, type, isFavorite, rating} = offer;
 
   return (
     <article className={isMainScreen ? AddClasses.ArticleMainAdClass : AddClasses.ArticlePropertyAdClass}
@@ -32,7 +32,7 @@ export default function Card({ offer, onCardMouseOver, isMainScreen }: CardProps
         </div>}
       <div className={isMainScreen ? AddClasses.ImageWrapperMainAdClass : AddClasses.ImageWrapperPropertyAdClass}>
         <a href="#">
-          <img className="place-card__image" src={img} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">

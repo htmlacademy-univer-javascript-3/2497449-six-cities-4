@@ -1,22 +1,17 @@
-import {useRef, useEffect } from 'react';
-import 'leaflet/dist/leaflet.css';
+import { useRef, useEffect } from 'react';
+import { Icon, Marker, layerGroup } from 'leaflet';
+
 import useMap from './map-use';
-import { Offer} from '../../types/offers';
-import { MapClasses } from '../../const';
-import { City } from '../../types/offers';
+import 'leaflet/dist/leaflet.css';
+import { Offer } from '../../types/offers';
+import { useAppSelector } from '../../hooks';
 
-
-import {Icon, Marker} from 'leaflet';
 
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 type MapData = {
   offers: Offer[];
-  activeCard: number;
-  isMainScreen: boolean;
-  city: City;
-
 }
 
 const defaultCustomIcon = new Icon({
@@ -31,39 +26,36 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-
-export default function Map(props: MapData): JSX.Element {
-  const {offers, activeCard, isMainScreen, city} = props;
-
-
+function Map({ offers }: MapData): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
-
-  useEffect(() => {
-    if (map) {
-      offers.forEach((offer: Offer) => {
-        const marker = new Marker({
-          lat: offer.city.latitude,
-          lng: offer.city.longitude,
-        });
-
-        marker.setIcon(
-          activeCard !== undefined && offer.id === activeCard.toString()
-            ? currentCustomIcon
-            : defaultCustomIcon
-        )
-          .addTo(map);
-      });
-    }
-  }, [map, offers, activeCard]);
-
-  useEffect(() => {
-    if (map) {
-      map.flyTo([city.latitude, city.longitude], city.zoom);
-    }
-  }, [map, city]);
-
-  return (
-    <section className={isMainScreen ? MapClasses.SectionMainMapClass : MapClasses.SectionPropertyMapClass} ref={mapRef}></section>
+  const map = useMap(mapRef);
+  const selectedPoint: null | { title: string } = useAppSelector(
+    (state) => state.selectedPoint
   );
+  useEffect(() => {
+    if (map) {
+      const markerLayer = layerGroup().addTo(map);
+      offers.forEach((point) => {
+        const marker = new Marker({
+          lat: point.city.location.latitude,
+          lng: point.city.location.longitude,
+        });
+        marker
+          .setIcon(
+            selectedPoint !== null && point.title === selectedPoint.title
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(markerLayer);
+      });
+
+      return () => {
+        map.removeLayer(markerLayer);
+      };
+    }
+  }, [map, offers, selectedPoint]);
+
+  return <div style={{ height: '100%' }} ref={mapRef}></div>;
 }
+
+export default Map;

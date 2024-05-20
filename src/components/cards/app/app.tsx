@@ -20,13 +20,12 @@ function App({reviews} : AppScreenProps): JSX.Element {
   const offers: Offer[] = useAppSelector((state) => state.offers);
   const dispatch = useAppDispatch();
   dispatch(listFilling());
-  const favorites = offers.filter((o) => o.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path ={AppRoute.Main}
-          element={<MainScreen favorites={favorites}/>}
+          element={<MainScreen />}
         />
         <Route
           path ={AppRoute.Favorites}

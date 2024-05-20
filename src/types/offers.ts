@@ -1,17 +1,17 @@
 export type Offer = {
   id: string;
-  img: string;
-  isPremium: boolean;
-  price: number;
   title: string;
   type: string;
+  price: number;
+  previewImage: string;
+  isPremium: boolean;
+  city: City;
   description: string;
   isFavorite: boolean;
   rating: number;
   numOfBedrooms: number;
   maxNumOfGuests: number;
   autor: Autor;
-  city: City;
 };
 
 export type Autor = {
@@ -23,9 +23,11 @@ export type Autor = {
 
 export type City = {
   name: string;
-  longitude: number;
-  latitude: number;
-  zoom: number;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
 }
 
 
@@ -33,3 +35,4 @@ export type Rating = {
   rating: string;
   comment: string;
 }
+
