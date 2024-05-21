@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Map from '../../components/map/map';
 import { useState } from 'react';
 import CitiesList from '../../components/cities-list/cities-list';
-import { Cities } from '../../const';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks';
 import CardsSorting from '../../components/sorting-cards/sorting-cards';
@@ -56,7 +55,7 @@ function MainScreen(): JSX.Element {
         <h1 className ="visually-hidden">Cities</h1>
         <div className ="tabs">
           <section className ="locations container">
-            <CitiesList cities={Cities}/>
+            <CitiesList/>
           </section>
         </div>
         <div className ="cities">
