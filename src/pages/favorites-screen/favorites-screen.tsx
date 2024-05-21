@@ -1,12 +1,8 @@
 import FavoritesCardsList from '../../components/favorites-cards-list/favorites-cards-list';
-import { Offer } from '../../types/offers';
 import { Link } from 'react-router-dom';
+import { offers } from '../../mock/offers';
 
-type FavoriteScreenProps = {
-  offers: Offer[];
-}
-
-function FavoritesScreen({offers}: FavoriteScreenProps) {
+function FavoritesScreen() {
   return (
     <div className ="page">
       <header className ="header">

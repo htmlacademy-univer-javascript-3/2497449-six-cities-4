@@ -7,26 +7,21 @@ import OfferScreen from '../../../pages/offer-screen/offer-screen';
 import PageNotFound from '../../../pages/page-not-found/page-not-found';
 import { AuthorizationStatus } from '../../../const';
 import PrivateRoute from '../../../pages/private-route/private-route';
-import { Offer } from '../../../types/offers';
 import { Review } from '../../../types/reviews';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { listFilling } from '../../../store/action';
+
 
 type AppScreenProps = {
   reviews: Review[];
 }
 
 function App({reviews} : AppScreenProps): JSX.Element {
-  const offers: Offer[] = useAppSelector((state) => state.offers);
-  const dispatch = useAppDispatch();
-  dispatch(listFilling());
-  const favorites = offers.filter((o) => o.isFavorite);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path ={AppRoute.Main}
-          element={<MainScreen favorites={favorites}/>}
+          element={<MainScreen />}
         />
         <Route
           path ={AppRoute.Favorites}
@@ -34,7 +29,7 @@ function App({reviews} : AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesScreen offers={offers}/>
+              <FavoritesScreen/>
             </PrivateRoute>
           }
 
@@ -45,7 +40,7 @@ function App({reviews} : AppScreenProps): JSX.Element {
         />
         <Route
           path ={AppRoute.Offer}
-          element={<OfferScreen reviews={reviews} offers={offers}/>}
+          element={<OfferScreen reviews={reviews} />}
         />
         <Route
           path ={'*'}

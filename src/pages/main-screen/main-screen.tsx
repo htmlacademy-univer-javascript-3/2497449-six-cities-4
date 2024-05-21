@@ -4,26 +4,19 @@ import { Link } from 'react-router-dom';
 import Map from '../../components/map/map';
 import { useState } from 'react';
 import CitiesList from '../../components/cities-list/cities-list';
-import { Cities } from '../../const';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks';
 import CardsSorting from '../../components/sorting-cards/sorting-cards';
-type MainScreenProps = {
-  favorites: Offer[];
-}
 
-function MainScreen({favorites}: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
-
   const [currentCityOffers, setCurrentCityOffers] = useState<Offer[]>(offers);
-
-
-  const city = useAppSelector((state) => state.city);
+  const city = useAppSelector((state) => state.city.name);
   useEffect(() => {
     const filteredOffers = offers.filter((offer) => offer.city.name === city);
     setCurrentCityOffers(filteredOffers);
   }, [city, offers]);
-  const [activeCard, setActiveCard] = useState(0);
+  const [, setActiveCard] = useState(0);
 
   return (
     <div className ="page page--gray page--main">
@@ -43,7 +36,7 @@ function MainScreen({favorites}: MainScreenProps): JSX.Element {
                     </div>
                     <span className ="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <Link to = "/favorites">
-                      <span className="header__favorite-count">{favorites.length}</span>
+                      <span className="header__favorite-count">{offers.length}</span>
                     </Link>
                   </Link>
                 </li>
@@ -62,7 +55,7 @@ function MainScreen({favorites}: MainScreenProps): JSX.Element {
         <h1 className ="visually-hidden">Cities</h1>
         <div className ="tabs">
           <section className ="locations container">
-            <CitiesList cities={Cities}/>
+            <CitiesList/>
           </section>
         </div>
         <div className ="cities">
@@ -76,7 +69,9 @@ function MainScreen({favorites}: MainScreenProps): JSX.Element {
               </div>
             </section>
             <section className="cities__right-section">
-              <Map isMainScreen offers={currentCityOffers} activeCard={activeCard} city = {currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city}/>
+              <section className="cities__map map">
+                <Map offers={offers} />
+              </section>
             </section>
           </div>
         </div>

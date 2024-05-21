@@ -6,7 +6,7 @@ type FavoriteCardProps = {
 }
 
 function FavoriteCard ({offer}: FavoriteCardProps): JSX.Element {
-  const {id, img, isPremium, price, title, type, isFavorite, rating} = offer;
+  const {id, previewImage, isPremium, price, title, type, isFavorite, rating} = offer;
   return(
     <article className ="favorites__card place-card">
       <div className="place-card__mark">
@@ -14,7 +14,7 @@ function FavoriteCard ({offer}: FavoriteCardProps): JSX.Element {
       </div>
       <div className ="favorites__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className ="place-card__image" src={img} width="150" height="110" alt="Place image"/>
+          <img className ="place-card__image" src={previewImage} width="150" height="110" alt="Place image"/>
         </a>
       </div>
       <div className ="favorites__card-info place-card__info">

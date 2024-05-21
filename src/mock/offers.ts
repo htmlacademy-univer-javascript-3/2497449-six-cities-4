@@ -5,7 +5,7 @@ export const offers: Offer[] = [
 
   {
     id: '1',
-    img: 'img/apartment-01.jpg',
+    previewImage: 'img/apartment-01.jpg',
     isPremium: true,
     price: 120,
     title: 'Beautiful &amp; luxurious apartment at great location',
@@ -16,11 +16,11 @@ export const offers: Offer[] = [
     numOfBedrooms: 3,
     maxNumOfGuests: 4,
     autor: {name: 'Angelina', autorAvatar: 'img/avatar-angelina.jpg', isPro: true},
-    city: {name: 'Amsterdam', latitude: 52.3909553943508, longitude: 4.85309666406198, zoom: 10 }
+    city: {name: 'Amsterdam', location: {latitude: 52.3909553943508, longitude: 4.85309666406198, zoom: 10 }}
   },
   {
     id: '2',
-    img: 'img/room.jpg',
+    previewImage: 'img/room.jpg',
     isPremium: false,
     price: 80,
     title: 'Wood and stone place',
@@ -31,12 +31,12 @@ export const offers: Offer[] = [
     numOfBedrooms: 1,
     maxNumOfGuests: 1,
     autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam' , latitude: 52.360955394350, longitude: 4.85309666406198, zoom: 10 }
+    city: {name: 'Amsterdam' , location: {latitude: 52.360955394350, longitude: 4.85309666406198, zoom: 10 }}
   },
 
   {
     id: '3',
-    img: 'img/apartment-02.jpg',
+    previewImage: 'img/apartment-02.jpg',
     isPremium: false,
     price: 132,
     title: 'Canal View Prinsengracht',
@@ -47,11 +47,11 @@ export const offers: Offer[] = [
     numOfBedrooms: 1,
     maxNumOfGuests: 1,
     autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam', latitude: 52.3909553943508, longitude: 4.929309666406198, zoom: 10 }
+    city: {name: 'Amsterdam', location: {latitude: 52.3909553943508, longitude: 4.929309666406198, zoom: 10 }}
   },
   {
     id: '4',
-    img: 'img/apartment-03.jpg',
+    previewImage: 'img/apartment-03.jpg',
     isPremium: true,
     price: 180,
     title: 'Nice, cozy, warm big bed apartment',
@@ -62,7 +62,7 @@ export const offers: Offer[] = [
     numOfBedrooms: 1,
     maxNumOfGuests: 1,
     autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam', latitude: 52.3809553943508, longitude: 4.939309666406198, zoom: 10 }
+    city: {name: 'Amsterdam', location: {latitude: 52.3809553943508, longitude: 4.939309666406198, zoom: 10 }}
   },
 
 ];
