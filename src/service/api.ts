@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axios, {AxiosInstance, AxiosResponse,AxiosError,InternalAxiosRequestConfig,} from 'axios';
+import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { processErrorHandle } from './process-error-handle';
 
@@ -6,6 +7,7 @@ type DetailMessageType = {
   type: string;
   message: string;
 };
+
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -23,6 +25,16 @@ export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
+  });
+
+  api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+    const token = getToken();
+
+    if (token && config.headers) {
+      config.headers['x-token'] = token;
+    }
+
+    return config;
   });
 
   api.interceptors.response.use(

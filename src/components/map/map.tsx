@@ -26,6 +26,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
+
 function Map({ offers }: MapData): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef);
@@ -36,6 +37,7 @@ function Map({ offers }: MapData): JSX.Element {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((point) => {
+
         const marker = new Marker({
           lat: point.city.location.latitude,
           lng: point.city.location.longitude,
@@ -48,6 +50,7 @@ function Map({ offers }: MapData): JSX.Element {
           )
           .addTo(markerLayer);
       });
+
 
       return () => {
         map.removeLayer(markerLayer);
