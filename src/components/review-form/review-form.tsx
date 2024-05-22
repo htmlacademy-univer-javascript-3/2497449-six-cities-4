@@ -1,16 +1,44 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, FormEvent } from 'react';
 import { Rating } from '../../types/offers';
+import { useAppDispatch } from '../../hooks';
+import { sendCommentAction } from '../../store/api-actions';
 
-export default function ReviewForm() {
+type ReviewFormProps = {
+  id: string;
+};
+
+export default function ReviewForm({id}: ReviewFormProps) {
   const [formState, setFormState] = useState<Rating>({
     rating: '',
     comment: '',
   });
-
+  const dispatch = useAppDispatch();
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormState((prevState) => ({
       ...prevState,
       comment: e.currentTarget.value,
+    }));
+  };
+
+  const isValid = () =>
+    formState.comment.trim().length > 49 && formState.rating !== '';
+
+  const handleFromSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(
+      sendCommentAction({
+        id,
+        comment: {
+          comment: formState.comment,
+          rating: Number(formState.rating),
+        },
+      })
+    );
+
+    setFormState((prevState) => ({
+      ...prevState,
+      rating: '',
+      comment: '',
     }));
   };
 
@@ -23,7 +51,7 @@ export default function ReviewForm() {
 
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" onSubmit={handleFromSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -140,7 +168,7 @@ export default function ReviewForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={!isValid()}
         >
           Submit
         </button>

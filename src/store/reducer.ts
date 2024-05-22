@@ -1,10 +1,16 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { Offer } from '../types/offers';
-import { cityChange, sortTypeSelect, loadOffers, setError, setOffersDataLoadingStatus, setSelectedPoint, setAuthorizationStatus} from './action';
+import { Offer, FullOffer } from '../types/offers';
+import { addReview, loadOfferData, cityChange, sortTypeSelect, loadOffers, setError, setOffersDataLoadingStatus, setSelectedPoint, setAuthorizationStatus} from './action';
 import { AuthorizationStatus } from '../const';
 import { City } from '../types/offers';
+import { Review } from '../types/reviews';
 
 type StateType = {
+  curOffer: {
+    offerInfo: FullOffer | null;
+    nearestOffers: Offer[];
+    reviews: Review[];
+  };
   city: City;
   offers: Offer[];
   sortType: string;
@@ -12,11 +18,16 @@ type StateType = {
   error: string|null;
   authorizationStatus: AuthorizationStatus;
   selectedPoint: {
-    title: string;
+    id: string;
   } | null;
 };
 
 const initialState: StateType = {
+  curOffer: {
+    offerInfo: null,
+    nearestOffers: [],
+    reviews: [],
+  },
   city: {
     name: 'Paris',
     location: {
@@ -40,6 +51,13 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, { payload }) => {
       state.offers = payload;
+    })
+    .addCase(loadOfferData, (state, { payload }) => {
+      state.selectedPoint = { id: payload.offerInfo.id };
+      state.curOffer = { ...payload };
+    })
+    .addCase(addReview, (state, { payload }) => {
+      state.curOffer.reviews = [...state.curOffer.reviews, payload];
     })
     .addCase(sortTypeSelect, (state, {payload}) => {
       state.sortType = payload;

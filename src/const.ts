@@ -2,8 +2,13 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer ='/offer/:id'
+  Offer ='/offer/:id',
 
+}
+export enum CardType {
+  favourites = 'favorites__card',
+  nearest = 'near-places__card',
+  regular = 'cities__card',
 }
 export enum AdClasses {
   ArticlePropertyAdClass = 'near-places__card place-card',
@@ -21,6 +26,7 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
 }
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -85,3 +91,5 @@ export const SORT_TYPES = {
   2: 'Price: high to low',
   3: 'Top rated first',
 };
+
+export const getRating = (rate: number) => `${(rate / 5) * 100}%`;
