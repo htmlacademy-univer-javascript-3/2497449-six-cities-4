@@ -16,7 +16,7 @@ function MainScreen(): JSX.Element {
     const filteredOffers = offers.filter((offer) => offer.city.name === city);
     setCurrentCityOffers(filteredOffers);
   }, [city, offers]);
-  const [, setActiveCard] = useState(0);
+
 
   return (
     <div className ="page page--gray page--main">
@@ -35,7 +35,7 @@ function MainScreen(): JSX.Element {
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{`${offers.length} places to stay in ${city}`}</b>
                 <CardsSorting />
-                <CardsList isMainScreen offers={offers} setActiveCard={setActiveCard}/>
+                <CardsList offers={offers}/>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">

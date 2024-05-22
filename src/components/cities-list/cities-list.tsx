@@ -11,7 +11,7 @@ type CityProps = {
 
 const CityItem = ({city, cityChangeName}: CityProps): JSX.Element => (
   <li className="locations__item" onClick={() => cityChangeName(city)}>
-    <a className="locations__item-link tabs__item" href="#">
+    <a className="locations__item-link tabs__item">
       <span>{city.name}</span>
     </a>
   </li>

@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
 
+
 import useMap from './map-use';
 import 'leaflet/dist/leaflet.css';
 import { Offer } from '../../types/offers';
@@ -26,31 +27,29 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-
 function Map({ offers }: MapData): JSX.Element {
+  const city = offers[0].city;
   const mapRef = useRef(null);
-  const map = useMap(mapRef);
-  const selectedPoint: null | { title: string } = useAppSelector(
+  const map = useMap(mapRef, city);
+  const selectedPoint: null | { id: string } = useAppSelector(
     (state) => state.selectedPoint
   );
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((point) => {
-
         const marker = new Marker({
           lat: point.city.location.latitude,
           lng: point.city.location.longitude,
         });
         marker
           .setIcon(
-            selectedPoint !== null && point.title === selectedPoint.title
+            selectedPoint !== null && point.title === selectedPoint.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
           .addTo(markerLayer);
       });
-
 
       return () => {
         map.removeLayer(markerLayer);

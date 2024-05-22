@@ -1,69 +1,124 @@
 import { Offer } from '../types/offers';
 
-
 export const offers: Offer[] = [
-
   {
     id: '1',
-    previewImage: 'img/apartment-01.jpg',
-    isPremium: true,
+    title: 'Hotel',
+    type: 'apartment',
     price: 120,
-    title: 'Beautiful &amp; luxurious apartment at great location',
-    type: 'Apartament',
-    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. Where the bustle of the city comes to rest in this alley flowery and colorful.',
-    isFavorite: false,
-    rating: 4.8,
-    numOfBedrooms: 3,
-    maxNumOfGuests: 4,
-    autor: {name: 'Angelina', autorAvatar: 'img/avatar-angelina.jpg', isPro: true},
-    city: {name: 'Amsterdam', location: {latitude: 52.3909553943508, longitude: 4.85309666406198, zoom: 10 }}
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 4,
+    previewImage:
+      'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg',
   },
   {
     id: '2',
-    previewImage: 'img/room.jpg',
-    isPremium: false,
-    price: 80,
-    title: 'Wood and stone place',
-    type: 'Room',
-    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. Where the bustle of the city comes to rest in this alley flowery and colorful.',
+    title: 'Hotel',
+    type: 'apartment',
+    price: 140,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8,
+      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
     isFavorite: true,
-    rating: 4,
-    numOfBedrooms: 1,
-    maxNumOfGuests: 1,
-    autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam' , location: {latitude: 52.360955394350, longitude: 4.85309666406198, zoom: 10 }}
+    isPremium: false,
+    rating: 3,
+    previewImage:
+      'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg',
   },
-
   {
     id: '3',
-    previewImage: 'img/apartment-02.jpg',
+    title: 'Hotel',
+    type: 'apartment',
+    price: 80,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
     isPremium: false,
-    price: 132,
-    title: 'Canal View Prinsengracht',
-    type: 'Apartament',
-    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. Where the bustle of the city comes to rest in this alley flowery and colorful.',
-    isFavorite: true,
-    rating: 4,
-    numOfBedrooms: 1,
-    maxNumOfGuests: 1,
-    autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam', location: {latitude: 52.3909553943508, longitude: 4.929309666406198, zoom: 10 }}
+    rating: 4.24,
+    previewImage:
+      'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg',
   },
   {
     id: '4',
-    previewImage: 'img/apartment-03.jpg',
-    isPremium: true,
-    price: 180,
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartament',
-    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. Where the bustle of the city comes to rest in this alley flowery and colorful.',
-    isFavorite: false,
-    rating: 5,
-    numOfBedrooms: 1,
-    maxNumOfGuests: 1,
-    autor: {name: 'Max', autorAvatar: 'img/avatar-max.jpg', isPro: false},
-    city: {name: 'Amsterdam', location: {latitude: 52.3809553943508, longitude: 4.939309666406198, zoom: 10 }}
+    title: 'Hotel',
+    type: 'apartment',
+    price: 200,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8,
+      },
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 8,
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 2,
+    previewImage:
+      'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg',
   },
-
+  {
+    id: '5',
+    title: 'Hotel',
+    type: 'apartment',
+    price: 120,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8,
+      },
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 8,
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 2,
+    previewImage:
+      'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg',
+  },
 ];
-
