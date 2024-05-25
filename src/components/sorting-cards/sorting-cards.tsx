@@ -2,6 +2,7 @@ import { useState } from 'react';
 import cn from 'classnames';
 import { SortingType } from '../../const';
 import { changeSortingType, getSelectedSortType, useAppDispatch, useAppSelector } from '../../store';
+import { memo } from 'react';
 
 function SortingCards() {
   const [isOpened, setIsOpened] = useState(false);
@@ -51,4 +52,6 @@ function SortingCards() {
   );
 }
 
-export default SortingCards;
+const SortingBlockMemo = memo(SortingCards);
+
+export default SortingBlockMemo;

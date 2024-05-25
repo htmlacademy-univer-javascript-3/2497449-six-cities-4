@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { CitiesNames } from '../../const';
 import { changeCity, useAppDispatch } from '../../store';
+import { memo } from 'react';
 
 type CitiesListProps = {
   selectedCity: CitiesNames;
@@ -49,4 +50,6 @@ function CitiesList({ selectedCity }: CitiesListProps): JSX.Element {
   );
 }
 
-export default CitiesList;
+const CitiesListMemo = memo(CitiesList);
+
+export default CitiesListMemo;

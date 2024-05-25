@@ -10,3 +10,4 @@ function PageNotFound(): JSX.Element {
 }
 
 export default PageNotFound;
+
