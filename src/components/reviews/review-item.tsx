@@ -1,46 +1,47 @@
 import { Review } from '../../types/reviews';
+import { getRating } from '../../const';
+const USER_AVATAR_SIZES = {
+  height: '54',
+  width: '54',
+};
 
-
-type ReviewProps = {
+type ReviewItemProps = {
   review: Review;
 };
 
-function formatDateString(dateString: string): string {
-  const dateObj = new Date(dateString);
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  const monthIndex = dateObj.getMonth();
-  const monthName = monthNames[monthIndex];
-  const year = dateObj.getFullYear();
-
-  return `${monthName} ${year}`;
-}
-
-export default function ReviewItem({ review }: ReviewProps): JSX.Element {
-  const {autor, rating, text, date, id} = review;
-  const dateString = formatDateString(date);
+function ReviewItem({ review }: ReviewItemProps): JSX.Element {
+  const { date, user, rating, comment } = review;
   return (
-    <li className ="reviews__item" key = {id}>
-      <div className ="reviews__user user">
-        <div className ="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={autor.autorAvatar} width="54" height="54" alt="Reviews avatar"/>
+    <li className="reviews__item">
+      <div className="reviews__user user">
+        <div className="reviews__avatar-wrapper user__avatar-wrapper">
+          <img
+            className="reviews__avatar user__avatar"
+            src={user.avatarUrl}
+            width={USER_AVATAR_SIZES.height}
+            height={USER_AVATAR_SIZES.height}
+            alt="Reviews avatar"
+          />
         </div>
-        <span className ="reviews__user-name">
-          {autor.name}
-        </span>
+        <span className="reviews__user-name">{user.name}</span>
       </div>
-      <div className ="reviews__info">
-        <div className ="reviews__rating rating">
-          <div className ="reviews__stars rating__stars">
-            <span style={{width: `${(rating / 5) * 100}%`}}></span>
+      <div className="reviews__info">
+        <div className="reviews__rating rating">
+          <div className="reviews__stars rating__stars">
+            <span style={{ width: getRating(rating) }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <p className="reviews__text">
-          {text}
-        </p>
-        <time className ="reviews__time" dateTime={date}>{dateString}</time>
+        <p className="reviews__text">{comment}</p>
+        <time
+          className="reviews__time"
+          dateTime={new Date(date).toDateString()}
+        >
+          {new Date(date).toDateString()}
+        </time>
       </div>
     </li>
   );
 }
+
+export default ReviewItem;

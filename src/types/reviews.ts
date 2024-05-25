@@ -2,8 +2,13 @@ import { Autor } from './offers';
 
 export type Review = {
   id: string;
-  autor: Autor;
+  user: Autor;
   date: string;
   rating: number;
-  text: string;
+  comment: string;
+};
+export type ReviewData = {
+  comment: string;
+  rating: number;
+  offerId: string;
 };

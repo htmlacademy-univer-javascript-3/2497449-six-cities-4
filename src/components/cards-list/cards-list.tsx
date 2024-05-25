@@ -1,21 +1,40 @@
-import Card from '../cards/card';
-import { Offer } from '../../types/offers';
-import { CardType } from '../../const';
+import Card from '../cards/card.tsx';
+import { getSorting } from '../../utils.ts';
+import { getSelectedSortType, useAppSelector } from '../../store';
+import { Offer } from '../../types/offers.ts';
 
-type CardsListProps = {
-    offers: Offer[];
+export type CardType = 'cities' | 'favorites' | 'near-places';
+
+type CardListProps = {
+  offers: Offer[];
+  cardType: CardType;
+  handleCardMouseEnter?: (id: Offer['id']) => void;
+  handleCardMouseLeave?: () => void;
 };
 
-export default function CardsList({ offers: offers}: CardsListProps) {
+function CardsList({
+  offers,
+  cardType,
+  handleCardMouseLeave,
+  handleCardMouseEnter,
+}: CardListProps): JSX.Element {
+
+  const selectedSortType = useAppSelector(getSelectedSortType);
+  const sortedOffers = getSorting[selectedSortType](offers);
+
   return (
-    <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => (
+    <>
+      {sortedOffers.map((offer) => (
         <Card
           key={offer.id}
-          cardInfo={offer}
-          typeClassName={CardType.regular}
+          {...offer}
+          cardType={cardType}
+          handleCardMouseEnter={(evt) => handleCardMouseEnter?.(evt)}
+          handleCardMouseLeave={() => handleCardMouseLeave?.()}
         />
       ))}
-    </div>
+    </>
   );
 }
+
+export default CardsList;
