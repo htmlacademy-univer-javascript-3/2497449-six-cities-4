@@ -1,16 +1,69 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducer';
-import { createAPI } from '../service/api';
-export const api = createAPI();
+export { store } from './store';
 
-export const store = configureStore({
-  reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      thunk: {
-        extraArgument: api,
-      },
-    }),
-});
+export {
+  fetchOfferAction,
+  updateSingleOffer,
+  getOffer,
+  getIsOfferLoading,
+} from './slices/offer';
+
+export {
+  fetchReviewsAction,
+  postReviewAction,
+  setReviewsErrorStatus,
+  getReviewsHasError,
+  getHasError,
+  getReviews,
+  getIsReviewsLoading,
+  getIsReviewsStatusSubmitting,
+} from './slices/reviews';
+
+export {
+  fetchNearbyAction,
+  updateMultipleNearby,
+  getNearbyOffers,
+  getIsNearbyOffersLoading,
+} from './slices/nearby-offers';
+
+export {
+  changeFavouriteStatusAction,
+  fetchFavoritesAction,
+  updateMultipleFavourites,
+  getFavorites,
+  getIsFavoriteStatusSubmitting,
+  getFavouritesCount,
+  getIsFavoritesLoading,
+} from './slices/favorites';
+
+export {
+  changeSortingType,
+  changeCity,
+  getSelectedSortType,
+  getSelectedCity,
+  getError,
+  setError,
+  clearErrorAction
+} from './slices/global';
 
 
+export {
+  fetchOffersAction,
+  updateMultipleOffers,
+  getOffers,
+  getIsOffersLoading,
+} from './slices/multiple-offers';
+
+export {
+  checkAuthAction,
+  loginAction,
+  logoutAction,
+  getIsSubmittingLogin,
+  getAuthCheckedStatus,
+  getUserInfo,
+  getAuthorizationStatus,
+} from './slices/user';
+
+export {
+  useAppDispatch,
+  useAppSelector
+} from './hooks';

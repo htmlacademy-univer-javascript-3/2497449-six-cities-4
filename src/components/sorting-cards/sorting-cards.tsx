@@ -1,36 +1,54 @@
-import {useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {sortTypeSelect} from '../../store/action.ts';
-import { SORT_TYPES } from '../../const.ts';
+import { useState } from 'react';
+import cn from 'classnames';
+import { SortingType } from '../../const';
+import { changeSortingType, getSelectedSortType, useAppDispatch, useAppSelector } from '../../store';
 
-function CardsSorting() {
-  const [isOpen, setIsOpen] = useState(false);
-  const selectedSortType = useAppSelector((state) => state.sortType);
+function SortingCards() {
+  const [isOpened, setIsOpened] = useState(false);
+  const selectedSortType = useAppSelector(getSelectedSortType);
   const dispatch = useAppDispatch();
-  const handleSortTypeChange = (sortType: string) => {
-    dispatch(sortTypeSelect(sortType));
+
+  const toggleSortingOptions = () => setIsOpened((prevState) => !prevState);
+
+  const handleSortTypeChange = (sortType: SortingType) => {
+    dispatch(changeSortingType(sortType));
+    setIsOpened(false);
   };
+
+  const sortingOptionsClass = cn('places__options', 'places__options--custom', {
+    'places__options--opened': isOpened,
+  });
+
   return (
-    <form className="places__sorting" action="#" method="get" onClick={() => setIsOpen(!isOpen)}>
+    <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
+      <span
+        className="places__sorting-type"
+        tabIndex={0}
+        onClick={toggleSortingOptions}
+      >
         {selectedSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpen ? 'places__options--opened' : ''}`}>
-        {Object.entries(SORT_TYPES).map(([key, sortType]) => (
-          <li key={key}
-            className={`places__option ${selectedSortType === sortType ? 'places__option--active' : ''}`}
-            onClick={() => handleSortTypeChange(sortType)}
+      <ul className={sortingOptionsClass}>
+        {Object.entries(SortingType).map(([sortType, title]) => (
+          <li
+            key={title}
+            className={cn('places__option', {
+              'places__option--active':
+                selectedSortType === (sortType as SortingType),
+            })}
+            onClick={() => handleSortTypeChange(title as SortingType)}
             tabIndex={0}
           >
-            {sortType}
-          </li>))}
+            {title}
+          </li>
+        ))}
       </ul>
     </form>
   );
 }
 
-export default CardsSorting;
+export default SortingCards;

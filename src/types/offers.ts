@@ -1,7 +1,7 @@
-
+import { CitiesNames } from '../const';
 export type Autor = {
   name: string;
-  autorAvatar: string;
+  avatarUrl: string;
   isPro: boolean;
 };
 
@@ -11,7 +11,7 @@ export type Location = {
   zoom: number;
 };
 export type City = {
-  name: string;
+  name: CitiesNames;
   location: Location;
 }
 

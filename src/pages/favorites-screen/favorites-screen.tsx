@@ -1,57 +1,33 @@
-import FavoritesCardsList from '../../components/favorites-cards-list/favorites-cards-list';
-import { Link } from 'react-router-dom';
-import { offers } from '../../mock/offers';
+import cn from 'classnames';
+import { getFavorites, getIsFavoritesLoading, useAppSelector } from '../../store';
+import Loader from '../../components/loader/loader';
+import EmptyFavorites from '../../components/favorites/empty-favorites';
+import Favorites from '../../components/favorites/favorites';
 
-function FavoritesScreen() {
+function FavoutitesScreen(): JSX.Element {
+  const isFavouritesLoading = useAppSelector(getIsFavoritesLoading);
+  const favorites = useAppSelector(getFavorites);
+  const isEmptyFavorites = favorites.length === 0;
+
+  if (isFavouritesLoading) {
+    return <Loader />;
+  }
+
   return (
-    <div className ="page">
-      <header className ="header">
-        <div className ="container">
-          <div className ="header__wrapper">
-            <div className ="header__left">
-              <Link to = "/" className ="header__logo-link">
-                <img className ="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
-            </div>
-            <nav className ="header__nav">
-              <ul className ="header__nav-list">
-                <li className ="header__nav-item user">
-                  <Link to = "/profile" className ="header__nav-link header__nav-link--profile">
-                    <div className ="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className ="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </Link>
-                  <Link to = "/favorites">
-                    <span className ="header__favorite-count">3</span>
-                  </Link>
-                </li>
-                <li className ="header__nav-item">
-                  <Link to = "/signout" className ="header__nav-link" >
-                    <span className ="header__signout">Sign out</span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-      <main className ="page__main page__main--favorites">
-        <div className ="page__favorites-container container">
-          <section className ="favorites">
-            <h1 className ="favorites__title">Saved listing</h1>
-            <ul className ="favorites__list">
-              <FavoritesCardsList offers={offers}/>
-            </ul>
-          </section>
-        </div>
-      </main>
-      <footer className ="footer container">
-        <Link to = "/" className ="footer__logo-link" >
-          <img className ="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </Link>
-      </footer>
-    </div>
+    <main
+      className={cn('page__main page__main--favorites', {
+        'page__main--favorites-empty': isEmptyFavorites,
+      })}
+    >
+      <div className="page__favorites-container container">
+        {isEmptyFavorites ? (
+          <EmptyFavorites />
+        ) : (
+          <Favorites favorites={favorites} />
+        )}
+      </div>
+    </main>
   );
 }
 
-export default FavoritesScreen;
+export default FavoutitesScreen;
