@@ -2,7 +2,7 @@ import Card from '../cards/card.tsx';
 import { getSorting } from '../../utils.ts';
 import { getSelectedSortType, useAppSelector } from '../../store';
 import { Offer } from '../../types/offers.ts';
-
+import { memo } from 'react';
 export type CardType = 'cities' | 'favorites' | 'near-places';
 
 type CardListProps = {
@@ -37,4 +37,6 @@ function CardsList({
   );
 }
 
-export default CardsList;
+const OffersListMemo = memo(CardsList);
+
+export default OffersListMemo;

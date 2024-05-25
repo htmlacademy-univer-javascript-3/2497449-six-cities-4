@@ -3,6 +3,7 @@ import { capitalizeFirstLetter } from '../../utils';
 import { getRating } from '../../const';
 import { CardType } from '../cards-list/cards-list';
 import { Offer } from '../../types/offers';
+import AddToFavouritesButton from '../add-to-favorites/add-to-favorites';
 
 type CardProps = Offer & {
   cardType: CardType;
@@ -16,6 +17,7 @@ function Card(props: CardProps): JSX.Element {
     cardType,
     handleCardMouseEnter,
     handleCardMouseLeave,
+    isFavorite,
     ...rest
   } = props;
   const pathCard = `/offer/${id}`;
@@ -50,6 +52,16 @@ function Card(props: CardProps): JSX.Element {
             <b className="place-card__price-value">€{rest.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
+          <AddToFavouritesButton
+            id={id}
+            isFavorite={isFavorite}
+            iconWidth={18}
+            iconHeight={19}
+            buttonClass="place-card__bookmark-button"
+            activeClass="place-card__bookmark-button--active"
+            iconClass="place-card__bookmark-icon"
+            buttonText="In bookmarks"
+          />
 
         </div>
         <div className="place-card__rating rating">
