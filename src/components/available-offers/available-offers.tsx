@@ -3,6 +3,7 @@ import SortingCards from '../sorting-cards/sorting-cards.tsx';
 import CardsList from '../cards-list/cards-list.tsx';
 import { Offer } from '../../types/offers.ts';
 import { getSelectedCity, useAppSelector } from '../../store';
+import { memo } from 'react';
 
 type AvailableOffersProps = {
   offers: Offer[];
@@ -37,4 +38,6 @@ function AvailableOffers({
   );
 }
 
-export default AvailableOffers;
+const AvailableOffersMemo = memo(AvailableOffers);
+
+export default AvailableOffersMemo;
