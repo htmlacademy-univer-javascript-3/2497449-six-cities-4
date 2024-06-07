@@ -118,4 +118,4 @@ export const SORT_TYPES = {
   3: 'Top rated first',
 };
 
-export const getRating = (rate: number) => `${(rate / 5) * 100}%`;
+export const getRating = (rate: number) => `${Math.round((rate / 5) * 100 / 20) * 20}%`;

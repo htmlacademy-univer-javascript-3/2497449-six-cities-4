@@ -6,6 +6,7 @@ import { store } from './store/store';
 import HistoryRouter from './components/history-route/history-route';
 import browserHistory from './browser-history';
 import { HelmetProvider } from 'react-helmet-async';
+import ErrorMessage from './components/error-message/error-message';
 
 
 const root = ReactDOM.createRoot(
@@ -17,6 +18,7 @@ root.render(
     <HelmetProvider>
       <Provider store={store}>
         <HistoryRouter history={browserHistory}>
+          <ErrorMessage />
           <App />
         </HistoryRouter>
       </Provider>

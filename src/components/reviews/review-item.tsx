@@ -37,7 +37,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
           className="reviews__time"
           dateTime={new Date(date).toDateString()}
         >
-          {new Date(date).toDateString()}
+          { new Date(date).toLocaleString('en-US', { month: 'long', year: 'numeric' })}
         </time>
       </div>
     </li>

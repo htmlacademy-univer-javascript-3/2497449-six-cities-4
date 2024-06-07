@@ -14,6 +14,8 @@ import { useOfferData, usePageInfo } from './hooks';
 import OfferInfo from '../../components/offer-info/offer-info';
 import Loader from '../../components/loader/loader';
 import { Offer } from '../../types/offers';
+import PageLayout from '../../components/page-layout/page-layout';
+
 
 const getShuffledNearby = (nearby: readonly Offer[]): Offer[] =>
   [...nearby].sort(() => Math.random() - 0.5);
@@ -43,7 +45,11 @@ function OfferPage(): JSX.Element | null {
   }
 
   if (!offer) {
-    return <PageNotFound />;
+    return (
+      <PageLayout isFooterShow>
+        <PageNotFound />
+      </PageLayout>
+    );
   }
 
   return (

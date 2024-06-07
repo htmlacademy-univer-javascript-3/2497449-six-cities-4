@@ -26,16 +26,17 @@ function OfferDescription({ offer }: OfferDescriptionProps): JSX.Element {
       className: 'offer__feature offer__feature--entire',
     },
     {
-      label: `${bedrooms} Bedrooms`,
+      label: `${bedrooms} ${bedrooms && bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`,
       className: 'offer__feature offer__feature--bedrooms',
     },
     {
-      label: `Max ${maxAdults} adults`,
+      label: `Max ${maxAdults} ${maxAdults && maxAdults > 1 ? 'adults' : 'adult'}`,
       className: 'offer__feature offer__feature--adults',
     },
   ];
 
   const ratingPercentage = getRating(rating);
+
 
   return (
     <>
